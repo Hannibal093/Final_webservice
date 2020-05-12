@@ -1,0 +1,30 @@
+    <ul id="dropdown1" class="dropdown-content">
+        {% if user.is_authenticated %}
+            <li><a href="/logout/">Logout</a></li>
+            <li class="divider"></li>
+        {% else %}
+            <li><a href="/register/">Regeister</a></li>
+            <li class="divider"></li>
+            <li><a href="/login/">Login</a></li>
+            <li class="divider"></li>
+        {% endif %}
+    </ul>
+    <nav>
+        <div class="container">    
+            <div class="nav-wrapper">
+                <a href="/" class="brand-logo left">web-service</a>
+                <ul class="right">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="{% url 'main:news_show' 0 %}">News</a></li>
+                    <li><a href="{% url 'main:stock_show' 0 %}">Stock</a></li>
+                    <!-- Dropdown Trigger -->
+                    {% if user.is_authenticated %}
+                        <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">{{user.username}}<i class="material-icons right">arrow_drop_down</i></a></li>
+                    {% else %}
+                        <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">User-menu<i class="material-icons right">arrow_drop_down</i></a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+

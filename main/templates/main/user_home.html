@@ -1,0 +1,37 @@
+{% extends 'main/index.html' %}
+
+
+{% block content %}
+
+<form class="search" action="{% url 'main:stock_search' %}" method='post'>
+  {% csrf_token %}
+  <input type="search" placeholder="輸入股票代號(ex:2330),或輸入股票名稱(ex:台積電)" name="q"
+      value='{{ query }}' required>
+  <button type="submit">Search</button>
+</form>
+
+
+<div class="row left" style="width:67%">
+    <h4>關注股票</h4>
+    {% for s in stock %}
+    <div class="col s10 m7 l4" style="width:33%">
+        <div class="card" >
+            <div class="card-image waves-effect waves-block waves-light">
+                <img class="activator" src="/media/{{ s.stock_id }}/stock_price_{{ s.stock_id }}.png">
+            </div>
+            <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4">{{ s.stock_id }} {{ s.stock_name }}<i class="material-icons right">more_vert</i></span>
+                <p><a href="{}">{{ s.industry }}</a></p>
+                <p><a href="{% url 'main:single_stock' s.stock_id %}">詳細資料</a></p>
+            </div>
+            <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">{{ s.stock_id }} {{ s.stock_name }}<i class="material-icons right">close</i></span>
+                <a href="{}">{{ s.industry }}</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+
+{% endblock %}

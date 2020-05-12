@@ -1,0 +1,2 @@
+user,password,host,port,database
+root,!QAZ2wsx,127.0.0.1,3306,django

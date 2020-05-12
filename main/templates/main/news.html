@@ -1,0 +1,40 @@
+{% extends 'main/index.html' %}
+
+
+{% block content %}
+<div>
+    <h4>新聞列表</h4>
+</div>
+
+    {% for n in news %}
+        <div class="col s12 m7">
+            <div class="card horizontal">
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <h5>{{ n.title }}</h5>
+                        <p>{{ n.time }}</p>
+                    </div>
+                    <div class="card-action">
+                         <a href="{{ n.url }}">原文連結</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+<ul class="pagination">
+    {% if page == 0 %}
+    <li class="waves-effect"><a href="{% url 'main:news_show' 1 %}"><i class="material-icons">chevron_left</i></a></li>
+    {% else %}
+    <li class="waves-effect"><a href="{% url 'main:news_show' last %}"><i class="material-icons">chevron_left</i></a></li>
+    {% endif %}
+    {% for p in page_list %}
+        {% if p == page %}
+        <li class="active"><a href="{% url 'main:news_show' p %}">{{ p }}</a></li>
+        {% else %}
+        <li class="waves-effect"><a href="{% url 'main:news_show' p %}">{{ p }}</a></li>
+        {% endif %}
+    {% endfor %}
+    <li class="waves-effect"><a href="{% url 'main:news_show' next %}"><i class="material-icons">chevron_right</i></a></li>
+</ul>
+
+{% endblock %}
